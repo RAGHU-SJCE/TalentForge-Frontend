@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 import { createJob, getMyJobs, deleteJob } from "../../services/recruiterService";
 
 const RecruiterJobs = ({ onSelectJob }) => {
@@ -27,11 +28,11 @@ const RecruiterJobs = ({ onSelectJob }) => {
         ...formData,
         skillsRequired: formData.skillsRequired.split(",").map(s => s.trim()),
       });
-      alert("Job Created Successfully");
+      toast.success("Job Created Successfully");
       setFormData({ title: "", company: "", location: "", salary: "", description: "", skillsRequired: "" });
       fetchJobs();
     } catch (error) {
-      alert(error.response?.data?.message);
+      toast.error(error.response?.data?.message || "Failed to create job");
     }
   };
 
@@ -39,10 +40,10 @@ const RecruiterJobs = ({ onSelectJob }) => {
     if (!window.confirm("Delete this job?")) return;
     try {
       const data = await deleteJob(jobId);
-      alert(data.message);
+      toast.success(data.message);
       fetchJobs();
     } catch (error) {
-      alert(error.response?.data?.message);
+      toast.error(error.response?.data?.message || "Failed to delete job");
     }
   };
 

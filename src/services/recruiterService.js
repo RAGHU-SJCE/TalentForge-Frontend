@@ -92,3 +92,11 @@ export const updateApplicationStatus =
 
     return data;
   };
+
+// Get Dashboard Analytics
+export const getRecruiterAnalytics = async () => {
+  const { data } = await axios.get("http://localhost:5000/api/dashboard/recruiter", {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
+  return data;
+};

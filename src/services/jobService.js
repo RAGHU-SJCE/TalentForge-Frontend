@@ -7,9 +7,9 @@ const getToken = () =>
   localStorage.getItem("token");
 
 // Get All Jobs
-export const getAllJobs = async () => {
+export const getAllJobs = async (queryString = "") => {
   const { data } =
-    await axios.get(API);
+    await axios.get(`${API}?${queryString}`);
 
   return data;
 };

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 import {
   getAllJobs,
@@ -14,57 +15,99 @@ import {
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
+  const [filters, setFilters] = useState({
+    title: "",
+    company: "",
+    location: "",
+    skill: ""
+  });
 
   useEffect(() => {
     fetchJobs();
-  }, []);
+  }, [filters]); // Refetch when filters change
 
   const fetchJobs = async () => {
     try {
-      const data =
-        await getAllJobs();
-
+      const queryParams = new URLSearchParams(filters).toString();
+      const data = await getAllJobs(queryParams);
       setJobs(data.jobs);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleApply = async (
-    jobId
-  ) => {
+  const handleApply = async (jobId) => {
     try {
-      const data =
-        await applyToJob(jobId);
-
-      alert(data.message);
+      const data = await applyToJob(jobId);
+      toast.success(data.message);
     } catch (error) {
-      alert(
-        error.response?.data?.message ||
-          "Application Failed"
-      );
+      toast.error(error.response?.data?.message || "Application Failed");
     }
   };
 
-  const handleSaveJob = async (
-    jobId
-  ) => {
+  const handleSaveJob = async (jobId) => {
     try {
-      const data =
-        await saveJob(jobId);
-
-      alert(data.message);
+      const data = await saveJob(jobId);
+      toast.success(data.message);
     } catch (error) {
-      alert(
-        error.response?.data?.message ||
-          "Failed to save job"
-      );
+      toast.error(error.response?.data?.message || "Failed to save job");
     }
+  };
+
+  const handleFilterChange = (e) => {
+    setFilters({
+      ...filters,
+      [e.target.name]: e.target.value
+    });
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px", maxWidth: "1200px", margin: "0 auto" }}>
       <h1>Available Jobs</h1>
+
+      {/* Filter Section */}
+      <div style={{ 
+        display: "flex", 
+        gap: "15px", 
+        marginBottom: "20px", 
+        background: "#f9fafb", 
+        padding: "15px", 
+        borderRadius: "8px",
+        flexWrap: "wrap"
+      }}>
+        <input 
+          type="text" 
+          name="title" 
+          placeholder="Job Title" 
+          value={filters.title} 
+          onChange={handleFilterChange} 
+          style={{ padding: "8px", borderRadius: "4px", border: "1px solid #ddd" }}
+        />
+        <input 
+          type="text" 
+          name="company" 
+          placeholder="Company" 
+          value={filters.company} 
+          onChange={handleFilterChange} 
+          style={{ padding: "8px", borderRadius: "4px", border: "1px solid #ddd" }}
+        />
+        <input 
+          type="text" 
+          name="location" 
+          placeholder="Location" 
+          value={filters.location} 
+          onChange={handleFilterChange} 
+          style={{ padding: "8px", borderRadius: "4px", border: "1px solid #ddd" }}
+        />
+        <input 
+          type="text" 
+          name="skill" 
+          placeholder="Required Skill" 
+          value={filters.skill} 
+          onChange={handleFilterChange} 
+          style={{ padding: "8px", borderRadius: "4px", border: "1px solid #ddd" }}
+        />
+      </div>
 
       {jobs.length === 0 ? (
         <p>No Jobs Found</p>

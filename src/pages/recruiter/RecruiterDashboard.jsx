@@ -2,9 +2,10 @@ import { useState } from "react";
 import RecruiterJobs from "./RecruiterJobs";
 import RecruiterApplicants from "./RecruiterApplicants";
 import InterviewManagement from "./InterviewManagement";
+import RecruiterAnalytics from "./RecruiterAnalytics";
 
 const RecruiterDashboard = () => {
-  const [activeTab, setActiveTab] = useState("jobs");
+  const [activeTab, setActiveTab] = useState("analytics");
   const [selectedJobId, setSelectedJobId] = useState(null);
 
   const handleSelectJob = (jobId, targetTab) => {
@@ -28,6 +29,12 @@ const RecruiterDashboard = () => {
       
       <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
         <button 
+          style={navButtonStyle("analytics")} 
+          onClick={() => { setActiveTab("analytics"); setSelectedJobId(null); }}
+        >
+          Analytics
+        </button>
+        <button 
           style={navButtonStyle("jobs")} 
           onClick={() => { setActiveTab("jobs"); setSelectedJobId(null); }}
         >
@@ -48,6 +55,7 @@ const RecruiterDashboard = () => {
       </div>
 
       <div style={{ background: "#f9fafb", padding: "20px", borderRadius: "8px", minHeight: "60vh" }}>
+        {activeTab === "analytics" && <RecruiterAnalytics />}
         {activeTab === "jobs" && <RecruiterJobs onSelectJob={handleSelectJob} />}
         {activeTab === "applicants" && <RecruiterApplicants jobId={selectedJobId} />}
         {activeTab === "interviews" && <InterviewManagement jobId={selectedJobId} />}
