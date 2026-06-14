@@ -18,6 +18,7 @@ import RecruiterDashboard from "../pages/recruiter/RecruiterDashboard";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 
 import ProtectedRoute from "../components/ProtectedRoute";
+import MyInterviews from "../pages/student/MyInterviews";
 
 function AppRoutes() {
   return (
@@ -115,6 +116,17 @@ function AppRoutes() {
             allowedRoles={["student"]}
           >
             <Projects />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/student/interviews"
+        element={
+          <ProtectedRoute
+            allowedRoles={["student"]}
+          >
+            <MyInterviews />
           </ProtectedRoute>
         }
       />

@@ -56,6 +56,12 @@ const StudentSidebar = () => {
         </li>
 
         <li>
+          <Link to="/student/interviews" style={{ color: "white", textDecoration: "none" }}>
+            🗓️ My Interviews
+          </Link>
+        </li>
+
+        <li>
           <Link to="/student/profile" style={{ color: "white", textDecoration: "none" }}>
             📄 Resume
           </Link>
