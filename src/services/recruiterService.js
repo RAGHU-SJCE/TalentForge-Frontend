@@ -1,0 +1,94 @@
+import axios from "axios";
+
+const JOB_API =
+  "http://localhost:5000/api/jobs";
+
+const APPLICATION_API =
+  "http://localhost:5000/api/applications";
+
+const getToken = () => {
+  return localStorage.getItem("token");
+};
+
+// Create Job
+export const createJob = async (
+  jobData
+) => {
+  const { data } = await axios.post(
+    JOB_API,
+    jobData,
+    {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    }
+  );
+
+  return data;
+};
+
+// Get Recruiter's Jobs
+export const getMyJobs = async () => {
+  const { data } = await axios.get(
+    `${JOB_API}/my-jobs`,
+    {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    }
+  );
+
+  return data;
+};
+
+// Delete Job
+export const deleteJob = async (
+  jobId
+) => {
+  const { data } = await axios.delete(
+    `${JOB_API}/${jobId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    }
+  );
+
+  return data;
+};
+
+// Get Applicants
+export const getApplicantsForJob =
+  async (jobId) => {
+    const { data } =
+      await axios.get(
+        `${APPLICATION_API}/job/${jobId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        }
+      );
+
+    return data;
+  };
+
+// Update Status
+export const updateApplicationStatus =
+  async (
+    applicationId,
+    status
+  ) => {
+    const { data } =
+      await axios.put(
+        `${APPLICATION_API}/${applicationId}/status`,
+        { status },
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        }
+      );
+
+    return data;
+  };

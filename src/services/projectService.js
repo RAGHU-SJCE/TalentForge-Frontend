@@ -1,0 +1,56 @@
+import axios from "axios";
+
+const API =
+  "http://localhost:5000/api/projects";
+
+const getToken = () =>
+  localStorage.getItem("token");
+
+export const createProject =
+  async (projectData) => {
+    const { data } =
+      await axios.post(
+        API,
+        projectData,
+        {
+          headers: {
+            Authorization:
+              `Bearer ${getToken()}`,
+          },
+        }
+      );
+
+    return data;
+  };
+
+export const getMyProjects =
+  async () => {
+    const { data } =
+      await axios.get(
+        `${API}/my-projects`,
+        {
+          headers: {
+            Authorization:
+              `Bearer ${getToken()}`,
+          },
+        }
+      );
+
+    return data;
+  };
+
+export const deleteProject =
+  async (projectId) => {
+    const { data } =
+      await axios.delete(
+        `${API}/${projectId}`,
+        {
+          headers: {
+            Authorization:
+              `Bearer ${getToken()}`,
+          },
+        }
+      );
+
+    return data;
+  };
