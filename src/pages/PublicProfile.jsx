@@ -9,7 +9,7 @@ import {
 import { toast } from "react-toastify";
 import { useAuth } from "../context/AuthContext";
 
-const API = "http://localhost:5000";
+const API = "https://talentforge-backend-sbpr.onrender.com";
 
 const getRoleColor = (role) => {
   if (role === "recruiter") return "#8b5cf6";

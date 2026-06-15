@@ -7,7 +7,7 @@ import {
   RefreshCw, UserCheck, BarChart2, FolderOpen
 } from "lucide-react";
 
-const API = "http://localhost:5000";
+const API = "https://talentforge-backend-sbpr.onrender.com";
 
 const ROLE_COLORS = {
   student: { bg: "#ecfdf5", color: "#10b981", border: "#d1fae5" },

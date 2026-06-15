@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API =
-  "http://localhost:5000/api/dashboard";
+  "https://talentforge-backend-sbpr.onrender.com/api/dashboard";
 
 const getToken = () =>
   localStorage.getItem("token");

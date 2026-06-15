@@ -220,7 +220,7 @@ const RecruiterApplicants = ({ jobId }) => {
                 <div style={{ display: "flex", flexDirection: "column", gap: "10px", alignItems: "flex-end" }}>
                   {application.student.resume && (
                     <a 
-                      href={`http://localhost:5000/${application.student.resume.replace(/\\/g, "/")}`} 
+                      href={`https://talentforge-backend-sbpr.onrender.com/${application.student.resume.replace(/\\/g, "/")}`} 
                       target="_blank" 
                       rel="noopener noreferrer"
                       style={{ background: "#f1f5f9", color: "#475569", textDecoration: "none", padding: "6px 12px", borderRadius: "4px", fontSize: "14px", fontWeight: "500", border: "1px solid #cbd5e1", display: "flex", alignItems: "center", gap: "4px" }}

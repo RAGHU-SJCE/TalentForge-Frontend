@@ -23,7 +23,7 @@ export const AuthProvider = ({
 
   useEffect(() => {
     if (user && user.id) {
-      const newSocket = io("http://localhost:5000");
+      const newSocket = io("https://talentforge-backend-sbpr.onrender.com");
       setSocket(newSocket);
 
       newSocket.emit("register_user", user.id);

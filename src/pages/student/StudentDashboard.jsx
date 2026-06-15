@@ -36,14 +36,14 @@ const StudentDashboard = () => {
 
   const fetchSuggestions = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/suggestions", { headers });
+      const res = await axios.get("https://talentforge-backend-sbpr.onrender.com/api/suggestions", { headers });
       setSuggestions(res.data.suggestions || []);
     } catch (e) { console.log(e); }
   };
 
   const fetchProfileViews = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/profile-views/my-views", { headers });
+      const res = await axios.get("https://talentforge-backend-sbpr.onrender.com/api/profile-views/my-views", { headers });
       setProfileViewers(res.data.viewers || []);
       setViewCount(res.data.totalViews || 0);
     } catch (e) { console.log(e); }
@@ -52,7 +52,7 @@ const StudentDashboard = () => {
   const handleConnect = async (userId) => {
     setConnectingId(userId);
     try {
-      await axios.post("http://localhost:5000/api/connections/request", { recipientId: userId }, { headers });
+      await axios.post("https://talentforge-backend-sbpr.onrender.com/api/connections/request", { recipientId: userId }, { headers });
       toast.success("Connection request sent!");
       setConnectedIds(prev => [...prev, userId]);
     } catch (error) {
@@ -251,7 +251,7 @@ const StudentDashboard = () => {
                 <div key={u._id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "10px" }}>
                   <Link to={`/user/${u._id}`} style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none", flex: 1, minWidth: 0 }}>
                     <div style={{ width: "38px", height: "38px", borderRadius: "50%", background: getRoleColor(u.role), display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700", fontSize: "13px", color: "white", flexShrink: 0, overflow: "hidden" }}>
-                      {u.profilePicture ? <img src={`http://localhost:5000${u.profilePicture}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : getInitials(u.fullName)}
+                      {u.profilePicture ? <img src={`https://talentforge-backend-sbpr.onrender.com${u.profilePicture}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : getInitials(u.fullName)}
                     </div>
                     <div style={{ minWidth: 0 }}>
                       <p style={{ margin: 0, fontWeight: "600", fontSize: "13px", color: "#0f172a", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{u.fullName}</p>
@@ -291,7 +291,7 @@ const StudentDashboard = () => {
               {profileViewers.slice(0, 5).map(v => (
                 <Link to={`/user/${v.viewedBy._id}`} key={v._id} style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
                   <div style={{ width: "38px", height: "38px", borderRadius: "50%", background: getRoleColor(v.viewedBy.role), display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700", fontSize: "13px", color: "white", flexShrink: 0, overflow: "hidden" }}>
-                    {v.viewedBy.profilePicture ? <img src={`http://localhost:5000${v.viewedBy.profilePicture}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : getInitials(v.viewedBy.fullName)}
+                    {v.viewedBy.profilePicture ? <img src={`https://talentforge-backend-sbpr.onrender.com${v.viewedBy.profilePicture}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : getInitials(v.viewedBy.fullName)}
                   </div>
                   <div style={{ minWidth: 0 }}>
                     <p style={{ margin: 0, fontWeight: "600", fontSize: "13px", color: "#0f172a", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{v.viewedBy.fullName}</p>

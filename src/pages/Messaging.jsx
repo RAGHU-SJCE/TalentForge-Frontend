@@ -19,7 +19,7 @@ const Messaging = () => {
     fetchContacts();
     
     // Initialize Socket
-    socketRef.current = io("http://localhost:5000");
+    socketRef.current = io("https://talentforge-backend-sbpr.onrender.com");
     const token = localStorage.getItem("token");
     
     // Assuming backend decode token or something. 
@@ -46,7 +46,7 @@ const Messaging = () => {
       const token = localStorage.getItem("token");
       // Getting contacts + connected network users to chat with
       // For simplicity, we just fetch connections network and treat them as contacts
-      const res = await axios.get("http://localhost:5000/api/connections/network", {
+      const res = await axios.get("https://talentforge-backend-sbpr.onrender.com/api/connections/network", {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -65,7 +65,7 @@ const Messaging = () => {
     setActiveContact(contact);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get(`http://localhost:5000/api/messages/${contact._id}`, {
+      const res = await axios.get(`https://talentforge-backend-sbpr.onrender.com/api/messages/${contact._id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMessages(res.data.messages);
@@ -80,7 +80,7 @@ const Messaging = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.post("http://localhost:5000/api/messages", {
+      const res = await axios.post("https://talentforge-backend-sbpr.onrender.com/api/messages", {
         receiverId: activeContact._id,
         content: newMessage,
       }, {
