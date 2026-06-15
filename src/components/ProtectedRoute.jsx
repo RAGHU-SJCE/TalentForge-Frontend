@@ -1,5 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import Layout from "../layouts/Layout";
 
 const ProtectedRoute = ({
   children,
@@ -18,7 +19,7 @@ const ProtectedRoute = ({
     return <Navigate to="/" />;
   }
 
-  return children;
+  return <Layout>{children}</Layout>;
 };
 
 export default ProtectedRoute;

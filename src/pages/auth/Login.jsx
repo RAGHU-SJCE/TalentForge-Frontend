@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 import { loginUser } from "../../services/authService";
 import { useAuth } from "../../context/AuthContext";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import Navbar from "../../components/Navbar";
 
 const Login = () => {
   const { user, login } = useAuth();
@@ -24,7 +27,7 @@ const Login = () => {
     } else if (
       user.role === "professional"
     ) {
-      navigate("/student/dashboard");
+      navigate("/professional/dashboard");
     } else if (
       user.role === "recruiter"
     ) {
@@ -60,109 +63,81 @@ const Login = () => {
         data.token
       );
 
-      alert(
-        "Login Successful"
-      );
+      toast.success("Login Successful");
 
-      if (
-        data.user.role ===
-        "student"
-      ) {
-        navigate(
-          "/student/dashboard"
-        );
-      } else if (
-        data.user.role ===
-        "professional"
-      ) {
-        navigate(
-          "/student/dashboard"
-        );
-      } else if (
-        data.user.role ===
-        "recruiter"
-      ) {
-        navigate(
-          "/recruiter/dashboard"
-        );
-      } else if (
-        data.user.role ===
-        "admin"
-      ) {
-        navigate(
-          "/admin/dashboard"
-        );
+      if (data.user.role === "student") {
+        navigate("/student/dashboard");
+      } else if (data.user.role === "professional") {
+        navigate("/professional/dashboard");
+      } else if (data.user.role === "recruiter") {
+        navigate("/recruiter/dashboard");
+      } else if (data.user.role === "admin") {
+        navigate("/admin/dashboard");
       }
     } catch (error) {
-      alert(
-        error.response?.data
-          ?.message ||
-          "Login Failed"
-      );
+      toast.error(error.response?.data?.message || "Login Failed");
     }
   };
 
   return (
-    <div
-      style={{
-        width: "400px",
-        margin: "100px auto",
-      }}
-    >
-      <h2>Login</h2>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <Navbar />
+      <div className="auth-layout" style={{ flex: 1, minHeight: "auto", padding: "40px 20px" }}>
+        <div className="auth-card">
+          <div style={{ textAlign: "center", marginBottom: "30px" }}>
+            <h2 style={{ fontSize: "2rem", marginBottom: "10px" }}>Welcome Back</h2>
+          <p>Login to TalentForge to continue</p>
+        </div>
 
-      <form
-        onSubmit={handleSubmit}
-      >
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter Email"
-          value={
-            formData.email
-          }
-          onChange={
-            handleChange
-          }
-          required
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginBottom:
-              "10px",
-          }}
-        />
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label className="form-label">Email Address</label>
+            <input
+              type="email"
+              name="email"
+              className="input-field"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter Password"
-          value={
-            formData.password
-          }
-          onChange={
-            handleChange
-          }
-          required
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginBottom:
-              "10px",
-          }}
-        />
+          <div className="form-group">
+            <label className="form-label">Password</label>
+            <input
+              type="password"
+              name="password"
+              className="input-field"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <button
-          type="submit"
-          style={{
-            width: "100%",
-            padding: "10px",
-          }}
-        >
-          Login
-        </button>
-      </form>
+          <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "20px" }}>
+            <Link to="/forgot-password" style={{ fontSize: "0.875rem", color: "var(--color-primary)" }}>
+              Forgot password?
+            </Link>
+          </div>
+
+          <button type="submit" className="btn btn-primary btn-block">
+            Sign In
+          </button>
+        </form>
+
+        <div style={{ textAlign: "center", marginTop: "20px", fontSize: "0.875rem" }}>
+          <p style={{ margin: 0 }}>
+            Don't have an account?{" "}
+            <Link to="/register" replace style={{ fontWeight: "600" }}>
+              Sign up here
+            </Link>
+          </p>
+        </div>
+      </div>
     </div>
+  </div>
   );
 };
 

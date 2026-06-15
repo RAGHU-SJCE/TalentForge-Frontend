@@ -39,18 +39,16 @@ export const getMyProjects =
     return data;
   };
 
-export const deleteProject =
-  async (projectId) => {
-    const { data } =
-      await axios.delete(
-        `${API}/${projectId}`,
-        {
-          headers: {
-            Authorization:
-              `Bearer ${getToken()}`,
-          },
-        }
-      );
+export const deleteProject = async (projectId) => {
+  const { data } = await axios.delete(`${API}/${projectId}`, {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
+  return data;
+};
 
-    return data;
-  };
+export const updateProject = async (projectId, projectData) => {
+  const { data } = await axios.put(`${API}/${projectId}`, projectData, {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
+  return data;
+};

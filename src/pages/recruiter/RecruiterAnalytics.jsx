@@ -5,6 +5,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as BarTooltip,
   LineChart, Line
 } from "recharts";
+import { Trophy } from "lucide-react";
 
 const COLORS = ["#3b82f6", "#f59e0b", "#10b981", "#ef4444"];
 
@@ -42,8 +43,53 @@ const RecruiterAnalytics = () => {
         <MetricCard title="Interviewed" value={data.totalInterviewedCandidates} color="#14b8a6" />
         <MetricCard title="Selected" value={data.totalSelectedCandidates} color="#10b981" />
         <MetricCard title="Rejected" value={data.totalRejectedCandidates} color="#ef4444" />
-        <MetricCard title="Upcoming Interviews" value={data.upcomingInterviews} color="#6366f1" />
+        <MetricCard title="Upcoming Interviews" value={data.upcomingInterviews?.length || 0} color="#6366f1" />
+        <MetricCard title="Avg Match Score" value={`${data.averageMatchScore || 0}%`} color="#ec4899" />
       </div>
+
+      {/* Best Candidate Highlight */}
+      {data.bestCandidate && (
+        <div style={{ background: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)", color: "white", padding: "20px", borderRadius: "8px", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", marginBottom: "40px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "20px" }}>
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
+              <Trophy size={28} />
+              <h3 style={{ margin: 0, fontSize: "20px" }}>Best Candidate Match</h3>
+            </div>
+            <p style={{ margin: "0 0 5px 0", fontSize: "18px", fontWeight: "bold" }}>{data.bestCandidate.student.fullName}</p>
+            <p style={{ margin: "0 0 10px 0", opacity: 0.9 }}>For: {data.bestCandidate.job.title}</p>
+            <div style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
+              {data.bestCandidate.student.skills?.slice(0, 5).map((skill, idx) => (
+                <span key={idx} style={{ background: "rgba(255,255,255,0.2)", padding: "4px 8px", borderRadius: "4px", fontSize: "12px" }}>{skill}</span>
+              ))}
+            </div>
+          </div>
+          <div style={{ background: "white", color: "#4f46e5", width: "80px", height: "80px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: "bold", boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }}>
+            {data.bestCandidate.matchPercentage}%
+          </div>
+        </div>
+      )}
+
+      {/* Upcoming Interviews Widget */}
+      {data.upcomingInterviews?.length > 0 && (
+        <div style={{ background: "white", padding: "20px", borderRadius: "8px", boxShadow: "0 2px 4px rgba(0,0,0,0.1)", marginBottom: "40px" }}>
+          <h3 style={{ margin: "0 0 15px 0" }}>Upcoming Interviews</h3>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            {data.upcomingInterviews.map((interview) => (
+              <div key={interview._id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "15px", border: "1px solid #e5e7eb", borderRadius: "6px" }}>
+                <div>
+                  <h4 style={{ margin: "0 0 5px 0", color: "#111827" }}>{interview.candidate?.fullName} - {interview.job?.title}</h4>
+                  <p style={{ margin: 0, fontSize: "14px", color: "#6b7280" }}>{new Date(interview.interviewDate).toLocaleString()}</p>
+                </div>
+                {interview.meetingLink && (
+                  <a href={interview.meetingLink} target="_blank" rel="noopener noreferrer" style={{ background: "#4f46e5", color: "white", padding: "8px 16px", borderRadius: "6px", textDecoration: "none", fontSize: "14px", fontWeight: "500" }}>
+                    Join
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Charts */}
       <div style={{ display: "flex", flexWrap: "wrap", gap: "40px" }}>

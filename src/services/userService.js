@@ -50,6 +50,51 @@ export const updateBio = async (bio) => {
   return response.data;
 };
 
+// Update Experience
+export const updateExperience = async (experience) => {
+  const response = await axios.put(
+    `${API_URL}/experience`,
+    { experience },
+    {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    }
+  );
+
+  return response.data;
+};
+
+// Update Company Details
+export const updateCompanyDetails = async (data) => {
+  const response = await axios.put(
+    `${API_URL}/company`,
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    }
+  );
+
+  return response.data;
+};
+
+// Update Advanced Profile
+export const updateAdvancedProfile = async (data) => {
+  const response = await axios.put(
+    `${API_URL}/advanced`,
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    }
+  );
+
+  return response.data;
+};
+
 // Upload Resume
 export const uploadResume = async (file) => {
   const formData = new FormData();

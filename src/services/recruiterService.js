@@ -57,6 +57,16 @@ export const deleteJob = async (
   return data;
 };
 
+// Update Job
+export const updateJob = async (jobId, jobData) => {
+  const { data } = await axios.put(`${JOB_API}/${jobId}`, jobData, {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
+  return data;
+};
+
+
+
 // Get Applicants
 export const getApplicantsForJob =
   async (jobId) => {
