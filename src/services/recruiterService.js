@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const JOB_API =
-  "https://talentforge-backend-sbpr.onrender.com/api/jobs";
+  "https://talentforge-backend-production.up.railway.app/api/jobs";
 
 const APPLICATION_API =
-  "https://talentforge-backend-sbpr.onrender.com/api/applications";
+  "https://talentforge-backend-production.up.railway.app/api/applications";
 
 const getToken = () => {
   return localStorage.getItem("token");
@@ -105,7 +105,7 @@ export const updateApplicationStatus =
 
 // Get Dashboard Analytics
 export const getRecruiterAnalytics = async () => {
-  const { data } = await axios.get("https://talentforge-backend-sbpr.onrender.com/api/dashboard/recruiter", {
+  const { data } = await axios.get("https://talentforge-backend-production.up.railway.app/api/dashboard/recruiter", {
     headers: { Authorization: `Bearer ${getToken()}` },
   });
   return data;

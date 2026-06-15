@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API =
-  "https://talentforge-backend-sbpr.onrender.com/api/applications";
+  "https://talentforge-backend-production.up.railway.app/api/applications";
 
 const getToken = () => {
   return localStorage.getItem("token");

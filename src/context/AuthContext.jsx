@@ -23,7 +23,7 @@ export const AuthProvider = ({
 
   useEffect(() => {
     if (user && user.id) {
-      const newSocket = io("https://talentforge-backend-sbpr.onrender.com");
+      const newSocket = io("https://talentforge-backend-production.up.railway.app");
       setSocket(newSocket);
 
       newSocket.emit("register_user", user.id);

@@ -143,7 +143,7 @@ const Profile = () => {
       const formData = new FormData();
       formData.append("profilePicture", file);
       const token = localStorage.getItem("token");
-      const res = await axios.put("https://talentforge-backend-sbpr.onrender.com/api/users/upload-profile-picture", formData, {
+      const res = await axios.put("https://talentforge-backend-production.up.railway.app/api/users/upload-profile-picture", formData, {
         headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" }
       });
       toast.success("Profile picture updated!");
@@ -188,7 +188,7 @@ const Profile = () => {
           <div style={{ position: "relative" }}>
             <div style={{ width: "80px", height: "80px", borderRadius: "50%", background: "linear-gradient(135deg,#2563eb,#7c3aed)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "28px", fontWeight: "700", color: "white", overflow: "hidden", border: "3px solid var(--color-surface)", boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}>
               {user.profilePicture
-                ? <img src={`https://talentforge-backend-sbpr.onrender.com${user.profilePicture}`} alt="Profile" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                ? <img src={`https://talentforge-backend-production.up.railway.app${user.profilePicture}`} alt="Profile" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 : user.fullName?.charAt(0)?.toUpperCase()
               }
             </div>
@@ -376,7 +376,7 @@ const Profile = () => {
             </div>
             
             <a
-              href={`https://talentforge-backend-sbpr.onrender.com/${user.resume.replace(/\\/g, "/")}`}
+              href={`https://talentforge-backend-production.up.railway.app/${user.resume.replace(/\\/g, "/")}`}
               target="_blank"
               rel="noreferrer"
               className="btn btn-outline"

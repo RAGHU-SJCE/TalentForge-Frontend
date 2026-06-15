@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://talentforge-backend-sbpr.onrender.com/api/auth";
+const API_URL = "https://talentforge-backend-production.up.railway.app/api/auth";
 
 export const registerUser = async (userData) => {
   const response = await axios.post(

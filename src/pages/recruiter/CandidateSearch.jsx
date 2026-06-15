@@ -17,7 +17,7 @@ const CandidateSearch = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      let url = "https://talentforge-backend-sbpr.onrender.com/api/users/students?";
+      let url = "https://talentforge-backend-production.up.railway.app/api/users/students?";
       if (name) url += `name=${name}&`;
       if (skill) url += `skill=${skill}&`;
       if (project) url += `project=${project}&`;

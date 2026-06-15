@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://talentforge-backend-sbpr.onrender.com/api/users";
+const API_URL = "https://talentforge-backend-production.up.railway.app/api/users";
 
 const getToken = () => {
   return localStorage.getItem("token");
