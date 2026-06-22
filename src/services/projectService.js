@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API =
-  "https://talentforge-backend-production.up.railway.app/api/projects";
+  "http://localhost:5000/api/projects";
 
 const getToken = () =>
   localStorage.getItem("token");
@@ -51,4 +51,4 @@ export const updateProject = async (projectId, projectData) => {
     headers: { Authorization: `Bearer ${getToken()}` },
   });
   return data;
-};
+};

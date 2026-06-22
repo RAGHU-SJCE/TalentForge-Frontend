@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
     const fetchCount = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("https://talentforge-backend-production.up.railway.app/api/notifications/unread-count",
+        const res = await axios.get("http://localhost:5000/api/notifications/unread-count",
           { headers: { Authorization: `Bearer ${token}` } });
         setUnreadCount(res.data.count || 0);
       } catch (e) {}
@@ -82,7 +82,7 @@ const Layout = ({ children }) => {
       setSearchLoading(true);
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(`https://talentforge-backend-production.up.railway.app/api/connections/search?q=${encodeURIComponent(searchQuery)}`, {
+        const res = await axios.get(`http://localhost:5000/api/connections/search?q=${encodeURIComponent(searchQuery)}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setSearchResults(res.data.users || []);
@@ -173,7 +173,7 @@ const Layout = ({ children }) => {
           {/* User mini profile */}
           <div style={{ padding: "16px 20px", borderBottom: "1px solid #1e293b", display: "flex", alignItems: "center", gap: "12px" }}>
             <div style={{ width: "40px", height: "40px", borderRadius: "50%", background: getRoleColor(user?.role), display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700", fontSize: "14px", flexShrink: 0, overflow: "hidden" }}>
-              {user?.profilePicture ? <img src={`https://talentforge-backend-production.up.railway.app${user.profilePicture}`} alt="avatar" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : getInitials(user?.fullName)}
+              {user?.profilePicture ? <img src={`http://localhost:5000${user.profilePicture}`} alt="avatar" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : getInitials(user?.fullName)}
             </div>
             <div style={{ minWidth: 0 }}>
               <p style={{ margin: 0, fontWeight: "600", fontSize: "14px", color: "#f1f5f9", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{user?.fullName}</p>
@@ -292,7 +292,7 @@ const Layout = ({ children }) => {
                       onMouseOut={e => e.currentTarget.style.background = darkMode ? "#1e293b" : "white"}
                     >
                       <div style={{ width: "36px", height: "36px", borderRadius: "50%", background: getRoleColor(u.role), display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700", fontSize: "13px", color: "white", flexShrink: 0, overflow: "hidden" }}>
-                        {u.profilePicture ? <img src={`https://talentforge-backend-production.up.railway.app${u.profilePicture}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : getInitials(u.fullName)}
+                        {u.profilePicture ? <img src={`http://localhost:5000${u.profilePicture}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : getInitials(u.fullName)}
                       </div>
                       <div style={{ minWidth: 0 }}>
                         <p style={{ margin: 0, fontWeight: "600", fontSize: "14px", color: darkMode ? "#f1f5f9" : "#0f172a" }}>{u.fullName}</p>

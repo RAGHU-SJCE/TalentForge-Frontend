@@ -27,8 +27,8 @@ const Network = () => {
   const fetchNetwork = async () => {
     try {
       const [networkRes, sentRes] = await Promise.all([
-        axios.get("https://talentforge-backend-production.up.railway.app/api/connections/network", { headers }),
-        axios.get("https://talentforge-backend-production.up.railway.app/api/connections/sent", { headers }),
+        axios.get("http://localhost:5000/api/connections/network", { headers }),
+        axios.get("http://localhost:5000/api/connections/sent", { headers }),
       ]);
       setPendingRequests(networkRes.data.pendingRequests || []);
       setConnections(networkRes.data.connections || []);
@@ -44,7 +44,7 @@ const Network = () => {
 
   const handleAcceptReject = async (id, action) => {
     try {
-      await axios.put(`https://talentforge-backend-production.up.railway.app/api/connections/request/${id}/${action}`, {}, { headers });
+      await axios.put(`http://localhost:5000/api/connections/request/${id}/${action}`, {}, { headers });
       toast.success(`Request ${action}ed`);
       fetchNetwork();
     } catch (error) {
@@ -55,7 +55,7 @@ const Network = () => {
   const handleRemove = async (id) => {
     if (!window.confirm("Remove this connection?")) return;
     try {
-      await axios.delete(`https://talentforge-backend-production.up.railway.app/api/connections/${id}/remove`, { headers });
+      await axios.delete(`http://localhost:5000/api/connections/${id}/remove`, { headers });
       toast.success("Connection removed");
       fetchNetwork();
     } catch (error) {
@@ -66,7 +66,7 @@ const Network = () => {
   const handleWithdraw = async (id) => {
     if (!window.confirm("Withdraw this connection request?")) return;
     try {
-      await axios.delete(`https://talentforge-backend-production.up.railway.app/api/connections/request/${id}/withdraw`, { headers });
+      await axios.delete(`http://localhost:5000/api/connections/request/${id}/withdraw`, { headers });
       toast.success("Request withdrawn");
       fetchNetwork();
     } catch (error) {
@@ -145,7 +145,7 @@ const Network = () => {
               <div key={conn._id} style={{ background: darkMode ? "#1e293b" : "white", border: `1px solid ${darkMode ? "#334155" : "#e2e8f0"}`, borderRadius: "12px", padding: "20px", display: "flex", flexDirection: "column", gap: "14px", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
                 <Link to={`/user/${other._id}`} style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
                   <div style={{ width: "48px", height: "48px", borderRadius: "50%", background: getRoleColor(other.role), display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700", fontSize: "16px", color: "white", flexShrink: 0, overflow: "hidden" }}>
-                    {other.profilePicture ? <img src={`https://talentforge-backend-production.up.railway.app${other.profilePicture}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : getInitials(other.fullName)}
+                    {other.profilePicture ? <img src={`http://localhost:5000${other.profilePicture}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : getInitials(other.fullName)}
                   </div>
                   <div>
                     <p style={{ margin: 0, fontWeight: "600", color: darkMode ? "#f1f5f9" : "#0f172a", fontSize: "15px" }}>{other.fullName}</p>
@@ -179,7 +179,7 @@ const Network = () => {
             <div key={req._id} style={{ background: darkMode ? "#1e293b" : "white", border: `1px solid ${darkMode ? "#334155" : "#e2e8f0"}`, borderRadius: "12px", padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
               <Link to={`/user/${req.requester._id}`} style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
                 <div style={{ width: "44px", height: "44px", borderRadius: "50%", background: getRoleColor(req.requester.role), display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700", fontSize: "14px", color: "white", overflow: "hidden" }}>
-                  {req.requester.profilePicture ? <img src={`https://talentforge-backend-production.up.railway.app${req.requester.profilePicture}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : getInitials(req.requester.fullName)}
+                  {req.requester.profilePicture ? <img src={`http://localhost:5000${req.requester.profilePicture}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : getInitials(req.requester.fullName)}
                 </div>
                 <div>
                   <p style={{ margin: 0, fontWeight: "600", color: darkMode ? "#f1f5f9" : "#0f172a" }}>{req.requester.fullName}</p>
@@ -212,7 +212,7 @@ const Network = () => {
             <div key={req._id} style={{ background: darkMode ? "#1e293b" : "white", border: `1px solid ${darkMode ? "#334155" : "#e2e8f0"}`, borderRadius: "12px", padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
               <Link to={`/user/${req.recipient._id}`} style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
                 <div style={{ width: "44px", height: "44px", borderRadius: "50%", background: getRoleColor(req.recipient.role), display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700", fontSize: "14px", color: "white", overflow: "hidden" }}>
-                  {req.recipient.profilePicture ? <img src={`https://talentforge-backend-production.up.railway.app${req.recipient.profilePicture}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : getInitials(req.recipient.fullName)}
+                  {req.recipient.profilePicture ? <img src={`http://localhost:5000${req.recipient.profilePicture}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : getInitials(req.recipient.fullName)}
                 </div>
                 <div>
                   <p style={{ margin: 0, fontWeight: "600", color: darkMode ? "#f1f5f9" : "#0f172a" }}>{req.recipient.fullName}</p>

@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { FileText, Download, Printer, User, Briefcase, Code, Award, FolderOpen, Link as LinkIcon, MapPin, Phone, Mail, Calendar } from "lucide-react";
 
-const API = "https://talentforge-backend-production.up.railway.app";
+const API = "http://localhost:5000";
 
 const ResumeBuilder = () => {
   const [profile, setProfile] = useState(null);

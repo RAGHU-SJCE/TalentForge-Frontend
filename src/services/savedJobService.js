@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API =
-  "https://talentforge-backend-production.up.railway.app/api/saved-jobs";
+  "http://localhost:5000/api/saved-jobs";
 
 const getToken = () =>
   localStorage.getItem("token");

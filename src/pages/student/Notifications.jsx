@@ -62,7 +62,7 @@ const Notifications = () => {
     setMarkingAll(true);
     try {
       const token = localStorage.getItem("token");
-      await axios.put("https://talentforge-backend-production.up.railway.app/api/notifications/mark-all-read",
+      await axios.put("http://localhost:5000/api/notifications/mark-all-read",
         {}, { headers: { Authorization: `Bearer ${token}` } });
       setNotifications(prev => prev.map(n => ({ ...n, isRead: true })));
       toast.success("All marked as read");

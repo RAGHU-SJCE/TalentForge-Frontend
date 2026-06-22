@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API =
-  "https://talentforge-backend-production.up.railway.app/api/notifications";
+  "http://localhost:5000/api/notifications";
 
 const getToken = () =>
   localStorage.getItem("token");
